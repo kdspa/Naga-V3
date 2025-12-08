@@ -17,11 +17,15 @@ class MoverStarPrecondition extends Precondition {
   async hasPerms(member) {
     if (this.container.developers.includes(member.id)) return this.ok();
 
+    const moverStarId = '1224072458206711928';
+    const moverDirectorId = '1225198018597228625';
+
     const roleIds = member.roles.cache.map(role => role.id);
 
-    const staffRoles = [this.container.staff.get('Mover Star'), this.container.staff.get('Sentry')];
-
-    const hasPermission = staffRoles.some((r) => roleIds.includes(r)) || member.permissions.has(PermissionFlagsBits.Administrator);
+    const hasPermission = roleIds.includes(moverStarId) ||
+                          roleIds.includes(moverDirectorId) ||
+                          member.permissions.has(PermissionFlagsBits.BanMembers) ||
+                          member.permissions.has(PermissionFlagsBits.Administrator);
 
     if (hasPermission) return this.ok();
 
