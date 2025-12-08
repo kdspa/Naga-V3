@@ -1,6 +1,6 @@
 const { Listener } = require('@sapphire/framework');
 
-const TASK_AMOUNT = 10;
+const TASK_AMOUNT = 9;
 
 class FinalTasks extends Listener {
   constructor(context, options) {
