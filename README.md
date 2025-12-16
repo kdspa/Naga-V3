@@ -12,7 +12,7 @@ This is the third version of this bot. V2 is located [here](https://github.com/a
 ### Instructions
 1. Clone the repo. 
 2. Run `nvm use` in the root directory of the project. This will set your node version to the one specified in .nvmrc, which is the latest Node LTS release (as of writing).
-3. Run `npm install`.
+3. Run `npm ci`.
 4. Create a copy of .env.example, rename it .env, and fill it out. At the minimum, you need to have a bot token and a MongoDB connection string.
 5. Run `npm start` in the root directory of the project to start the bot.
 
