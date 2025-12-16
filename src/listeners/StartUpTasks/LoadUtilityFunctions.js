@@ -12,8 +12,8 @@ class LoadUtlityFunctions extends Listener {
   run() {
     this.container.logger.info('Loading all utility functions...')
 
-    const utils = require('../../lib/utils/UtilityFunctions');
-    this.container.utils = utils;
+    const { Utilities } = require('../../lib/utils/Utilities');
+    this.container.utils = new Utilities();
 
     this.container.logger.info('+ Loaded all utility functions');
 

@@ -20,7 +20,7 @@ This is the third version of this bot. V2 is located [here](https://github.com/a
 To access models within a command or listener file, use `this.container.models.get('[model name]')`. The model name has to be the name of the model file; it is case-sensitive. All models are located in `src/models/`.
 
 ## Accessing Utility Functions
-To access utility functions within a command or listener, use `this.container.utils`. For example, if I wanted to use the `sendSuccess` function, I would use `this.container.utils.sendSuccess()`. All utility functions are located in `src/lib/utils/UtilityFunctions.js`.
+To access utility functions within a command or listener, use `this.container.utils`. For example, if I wanted to use the `sendSuccess` function, I would use `this.container.utils.sendSuccess()`. All utility functions are located in `src/lib/utils/Utilities.js`.
 
 ## Preconditions
 Command permissions are dictated by precondition files, which are located in `src/preconditions`. 
