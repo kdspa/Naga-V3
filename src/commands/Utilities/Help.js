@@ -93,7 +93,7 @@ class Help extends Command {
     const commandEmbed = {
       color: 9031664, 
       author: {
-        name: `Help for ${commandName}`,
+        name: `Help for ${command.name}`,
         iconURL: this.container.client.user.displayAvatarURL()
       },
       description: command.description,
