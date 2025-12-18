@@ -14,7 +14,8 @@ class SetColor extends Command {
                                        '**Primary/Secondary/Tertiary Colors:**: Hex code or an integer (base 10). Primary ' +
                                        'is required, secondary and tertiary are optional.'
       },
-      preconditions: ['Sentry']
+      preconditions: ['Sentry'],
+      requiredClientPermissions: 'ManageRoles'
     });
   }
 
@@ -121,10 +122,10 @@ class SetColor extends Command {
 
     confirmationMessage.push(`of role <@&${role.id}> (${role.id})`);
 
-    confirmationMessage.push(`\n\n__Old Colors__\nPrimary: ${oldRoleColors[0]}`);
+    confirmationMessage.push(`\n\n__Old Colors__\nPrimary: \`${oldRoleColors[0]}\``);
 
-    if (secondaryColor) confirmationMessage.push(`\nSecondary: ${oldRoleColors[1]}`);
-    if (tertiaryColor) confirmationMessage.push(`\nTertiary: ${oldRoleColors[2]}`);
+    if (secondaryColor) confirmationMessage.push(`\nSecondary: \`${oldRoleColors[1]}\``);
+    if (tertiaryColor) confirmationMessage.push(`\nTertiary: \`${oldRoleColors[2]}\``);
     
     return confirmationMessage.join(' ');
   }
