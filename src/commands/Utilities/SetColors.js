@@ -124,8 +124,8 @@ class SetColors extends Command {
 
     confirmationMessage.push(`\n\n__Old Colors__\nPrimary: \`${oldRoleColors[0]}\``);
 
-    if (secondaryColor) confirmationMessage.push(`\nSecondary: \`${oldRoleColors[1]}\``);
-    if (tertiaryColor) confirmationMessage.push(`\nTertiary: \`${oldRoleColors[2]}\``);
+    if (oldRoleColors[1]) confirmationMessage.push(`\nSecondary: \`${oldRoleColors[1]}\``);
+    if (oldRoleColors[2]) confirmationMessage.push(`\nTertiary: \`${oldRoleColors[2]}\``);
     
     return confirmationMessage.join(' ');
   }
