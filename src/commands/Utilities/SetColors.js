@@ -42,7 +42,7 @@ class SetColors extends Command {
         )
         .addStringOption((option) =>
           option.setName('secondary_color').setDescription('The secondary color. Can be a hex code or an integer (base 10).')
-        ), { guildIds: ['650143161645006848', '370708369951948800'] });
+        ));
   }
 
   async messageRun(message, args) {
