@@ -74,8 +74,8 @@ class RoleInfo extends Command {
       };
 
       if (role.icon !== null) {
-        embed.author.icon_url = role.iconURL;
-        embed.thumbnail.url = role.iconURL;
+        embed.author.icon_url = role.iconURL();
+        embed.thumbnail.url = role.iconURL();
       }
 
       if (role.permissions) {
