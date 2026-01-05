@@ -2,7 +2,6 @@ const { Command } = require('@sapphire/framework');
 const axios = require('axios');
 
 const HEX_REGEX = /^#?[0-9a-fA-F]{6}$/;
-const BASE_10_INTEGER_REGEX = /^(0|[1-9]\d*)$/;
 
 class Color extends Command {
   constructor(context, options) {
@@ -10,7 +9,7 @@ class Color extends Command {
       ...options, 
       name: 'color',
       aliases: ['colour'],
-      description: 'Display a color.',
+      description: 'Display a color. Displays a random color if one isn\'t provided.',
       detailedDescription: {
         'Command Forms and Arguments': '`n.color [hex code / random]`\n' + 
                                        '**Hex Code:** A standard hex code\n' +
@@ -62,7 +61,7 @@ class Color extends Command {
    * @param {String} color A color hex code
    * @returns 
    */
-  async requestColor(color, random) {
+  async requestColor(color) {
     if (!color.match(HEX_REGEX)) color = 'random';
     if (color === 'random') color = this.random().hex;
     let colorObj = {
@@ -99,7 +98,7 @@ class Color extends Command {
   }
 
   async messageRun(message, args) {
-    let colorArg = await args.pick('string').catch(() => null);
+    let colorArg = await args.pick('string').catch(() => null) || this.random().hex;
 
     try {
       let color = await this.requestColor(colorArg);
@@ -115,7 +114,7 @@ class Color extends Command {
     const colorArg = interaction.options.getString('hex');
     const isRandom = interaction.options.getBoolean('random');
 
-    let color = colorArg;
+    let color = colorArg || this.random().hex;
     if (isRandom) color = this.random().hex;
 
     await interaction.deferReply();
@@ -123,8 +122,6 @@ class Color extends Command {
     try {
       color = await this.requestColor(color);
       let embed = this.buildEmbed(color);
-
-      console.log(embed);
 
       return interaction.editReply({embeds: [embed]});
     } catch (err) {
