@@ -10,13 +10,13 @@ class ShowLoadedCommands extends Listener {
   }
 
   run() {
-    const commandNames = this.container.stores.get('commands').keys();
+    const commands = this.container.stores.get('commands').values();
 
-    if (commandNames.length != 0) {
+    if (commands.length != 0) {
       this.container.logger.info('Loading commands...');
 
-      for (const commandName of commandNames) {
-        this.container.logger.info(`+ Loaded ${commandName}`);
+      for (const command of commands) {
+        if (command.enabled) this.container.logger.info(`+ Loaded ${command.name}`);
       }
     }
 
