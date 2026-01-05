@@ -47,7 +47,7 @@ module.exports = async function list(messageOrInteraction) {
   let embed;
 
   if (fields.length === 0) {
-    embed = { description: 'There is nothing in the database!'};
+    embed = { color: 15747399, description: 'There is nothing in the database!' };
   } else {
     embed = { fields: fields };
   }
