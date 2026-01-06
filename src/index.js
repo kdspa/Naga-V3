@@ -5,8 +5,6 @@ const mongoose = require('mongoose');
 require('@sapphire/plugin-logger/register');
 require('dotenv').config({ path: __dirname + '/.env' });
 
-container.developers = process.env.DEVELOPERS.split(',').map(dev => dev.trim());
-
 mongoose.connect(process.env.DB_CONNECTION_STRING)
   .then(() => container.logger.info(`Successfully connected to database!`))
   .catch((err) => console.error(err));
