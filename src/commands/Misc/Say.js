@@ -1,8 +1,5 @@
 const { Command } = require('@sapphire/framework');
 
-const CHANNEL_MENTION_REGEX = /<#([0-9]+)/g;
-const SNOWFLAKE_REGEX = /^([0-9]+)$/g;
-
 class Say extends Command {
     constructor(context, options) {
         super(context, {
@@ -35,31 +32,12 @@ class Say extends Command {
         )
     }
 
-    async resolveChannel(guild, channel) {
-		const mention = CHANNEL_MENTION_REGEX.exec(channel);
-		if (mention && mention.length > 1) {
-			return guild.channels.fetch(mention[1]);
-		}
-
-		if (channel.match(SNOWFLAKE_REGEX)) {
-			const channelIdSearch = guild.channels.fetch(channel);
-			if (channelIdSearch) {
-				return channelIdSearch;
-			}
-		}
-
-		const channelNameSearch = guild.channels.cache.find(c => c.name === channel);
-		if (channelNameSearch) {
-			return channelNameSearch;
-		}
-	}
-
     async messageRun(message, args) {
         const channelArg = await args.pick('string').catch(() => null);
         const messageArg = await args.pick('string').catch(() => null);
 
         try {
-            const channel = await this.resolveChannel(message.channel.guild, channelArg);
+            const channel = await this.container.resolver.channel(message.channel.guild, channelArg);
             channel.send(messageArg);
         } catch (err) {
             console.error(err);
