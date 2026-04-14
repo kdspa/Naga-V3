@@ -53,7 +53,12 @@ class UserInfo extends Command {
   };
 
     async userInfo(messageOrInteraction, user) {
-        const member = (await Resolvers.resolveMember(user, messageOrInteraction.guild)).unwrapOrElse(() => null);
+        let member;
+        if (!user) {
+            member = messageOrInteraction.member;
+        } else {
+            member = await this.container.resolver.user(messageOrInteraction.guild, user) || messageOrInteraction.member;
+        }
         if (!member) return this.container.utils.sendError(messageOrInteraction.channel, `Couldn't find member ${user}.`);
 
         // for (let i = 0; i < this.utils.checkStaff(member).length; i += 1) {
@@ -62,10 +67,25 @@ class UserInfo extends Command {
 
         let tatsuRank = await tatsu.getMemberRanking('370708369951948800', member.id);
 
+        let roles, roleColor;
+        if (member.roles.cache.size) {
+            try {
+                let r = []
+                roles = member.roles.cache.filter(r => r.id !== messageOrInteraction.guild.id).each(role => r.push(role));
+                roles = r.sort((a,b) => b.position - a.position);
+                roles = roles.map(r => `<@&${r.id}>`).join(', ');
+            } catch (err) {
+                console.error(err);
+            }
+        } else {
+            roles = 'No Roles';
+            roleColor = this.container.utils.getColor('blue');
+        }
+
         let embed = {  
             author: { name: member.displayName, icon_url: member.displayAvatarURL() },
             thumbnail: { url: member.displayAvatarURL() },
-            color: this.container.utils.getColor('blue'),
+            color: roleColor || this.container.utils.getColor('blue'),
             // description: bio || null,
 
             fields: [
@@ -73,6 +93,7 @@ class UserInfo extends Command {
                 { name: 'Server XP', value: `${tatsuRank.score.toLocaleString()} XP (Rank #${tatsuRank.rank})`, inline: false },
                 { name: 'Joined', value: `<t:${Math.floor(member.joinedAt / 1000)}:F>`, inline: false },
                 { name: 'Registered', value: `<t:${Math.floor(member.user.createdAt / 1000)}:F>`, inline: false },
+                { name: `Roles [${member.roles.cache.size - 1}]`, value: roles, inline: false }
             ],
 
             footer: { text: `ID: ${member.id}` },
@@ -98,9 +119,9 @@ class UserInfo extends Command {
     }
 
     async messageRun(message, args) {
-        const memberArg = await args.pick('string').catch(() => null) || message.member;
-        if (!memberArg) return this.container.utils.sendError(message.channel, 'You need to provide a user!');
-        this.userInfo(message, memberArg);
+        const memberArg = await args.pick('string').catch(() => null);
+        if (!memberArg) this.userInfo(message);
+        else this.userInfo(message, memberArg);
     };
 
     async chatInputRun(interaction) {

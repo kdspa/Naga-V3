@@ -51,7 +51,7 @@ class RoleInfo extends Command {
 
   async roleInfo(messageOrInteraction, roleArg) {
     try {
-      const role = (await Resolvers.resolveRole(roleArg, messageOrInteraction.guild)).unwrapOrElse(() => null);
+      const role = await this.container.resolver.role(messageOrInteraction.guild, roleArg);
 
       if (!role) return this.container.utils.sendError(messageOrInteraction.channel, 'Unknown role!');
 
