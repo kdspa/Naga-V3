@@ -17,7 +17,6 @@ class CreateGuide extends Command {
     const client = this.container.client;
     let channel = await client.channels.cache.get('1178846102586404884');
     let msg = await channel.messages.fetch('1511434943992041632');
-    console.log(msg);
     await msg.edit(home);
   }
 }
