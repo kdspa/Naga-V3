@@ -10,6 +10,7 @@ let home = {
     components: [
         {
             type: 17, // Container
+            accent_color: 15913095,
             components: [
                 {
                     type: 12, // Banner image
@@ -89,7 +90,8 @@ let home = {
                     type: 2,
                     label: 'Our Team', 
                     style: 1, 
-                    custom_id: 'guide_button_team'
+                    custom_id: 'guide_button_team',
+                    disabled: true
                 }, 
                 {
                     type: 2,

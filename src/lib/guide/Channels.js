@@ -150,6 +150,7 @@ function channelInfo(category, isEdit) {
         components: [
             {
                 type: 17, // Container
+                accent_color: 15913095,
                 components: [
                     {
                         type: 10, // Description
