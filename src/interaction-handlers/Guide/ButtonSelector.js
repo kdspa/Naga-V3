@@ -1,7 +1,7 @@
 const { InteractionHandler, InteractionHandlerTypes } = require('@sapphire/framework');
-
 const { faq } = require('../../lib/guide/FAQ');
 const { channelInfo } = require('../../lib/guide/Channels');
+const { roleInfo } = require('../../lib/guide/Roles');
 const { replyStore } = require('../../lib/guide/ReplyStore');
 
 class ButtonSelector extends InteractionHandler {
@@ -20,18 +20,27 @@ class ButtonSelector extends InteractionHandler {
     }
 
     async run(interaction) {
-        if (interaction.componentType !== 2) return;
-        if (interaction.customId === 'guide_button_faq') {
-            return interaction.reply(faq);
-        };
-
-        if (interaction.customId === 'guide_button_channelinfo') {
-            let channels = channelInfo('guide');
-            let reply = await interaction.reply(channels);
+        try {
+            let content;
+            if (interaction.componentType !== 2) return;
+            switch (interaction.customId) {
+                case 'guide_button_faq':
+                    content = faq;
+                    break;
+                case 'guide_button_channelinfo':
+                    content = channelInfo('guide');
+                    break;
+                case 'guide_button_roleinfo':
+                    content = roleInfo('activity');
+                    break;
+            };
+            let reply = await interaction.reply(content);
             replyStore.set(interaction.member.id, reply);
             return;
-        };
-    }
-}
+        } catch (err) {
+            console.error(err);
+        }
+    };
+};
 
 module.exports = { ButtonSelector };
