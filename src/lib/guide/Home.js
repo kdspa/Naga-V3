@@ -3,7 +3,7 @@ const { MessageFlags } = require('discord.js');
 let description = [ 
     'We are a Discord community for fans of the Avatar Legends universe (ATLA, Legend of Korra, and all other related media). Established in 2017 and partnered with Discord since 2021, we are your one-stop shop for all things Avatar! We are not associated with Nickelodeon or Avatar Studios.',
     'For any questions, feedback, concerns or reports, you can contact the server staff by clicking the "Contact Staff" button below.',
-    'Want to connect with us more? Check out these links below!'].join('\n\n');
+    'Want to connect with us more? Check out these links below! We are **@atlacord** on most major platforms!'].join('\n\n');
 
 let home = {
     flags: MessageFlags.IsComponentsV2,
@@ -91,7 +91,7 @@ let home = {
                     label: 'Our Team', 
                     style: 1, 
                     custom_id: 'guide_button_team',
-                    disabled: true
+                    // disabled: true
                 }, 
                 {
                     type: 2,

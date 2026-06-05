@@ -2,6 +2,7 @@ const { InteractionHandler, InteractionHandlerTypes } = require('@sapphire/frame
 const { faq } = require('../../lib/guide/FAQ');
 const { channelInfo } = require('../../lib/guide/Channels');
 const { roleInfo } = require('../../lib/guide/Roles');
+const { team } = require('../../lib/guide/Team');
 const { replyStore } = require('../../lib/guide/ReplyStore');
 
 class ButtonSelector extends InteractionHandler {
@@ -33,13 +34,15 @@ class ButtonSelector extends InteractionHandler {
                 case 'guide_button_roleinfo':
                     content = roleInfo('activity');
                     break;
+                case 'guide_button_team':
+                    content = await team(this.container);
             };
             let reply = await interaction.reply(content);
             replyStore.set(interaction.member.id, reply);
             return;
         } catch (err) {
             console.error(err);
-        }
+        };
     };
 };
 
