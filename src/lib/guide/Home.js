@@ -97,6 +97,7 @@ let home = {
                     type: 2,
                     label: 'Contact Staff',
                     style: 5,
+                    custom_id: 'guide_button_contact',
                     url: 'https://127.0.0.1', // Replace this with the contact modal once finished
                 }
             ]
