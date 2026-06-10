@@ -18,7 +18,7 @@ async function modal(interaction) {
                                 value: 'report',
                                 description: 'Select this option if you need to report a user.',
                                 emoji: {
-                                    name: ''
+                                    name: '📣'
                                 },
                             },
                             {
@@ -32,7 +32,7 @@ async function modal(interaction) {
                                 value: 'eventmaster',
                                 description: 'Are you interested in hosting events in this community? Select this opton to apply for the Event Master role.',
                                 emoji: {
-                                    name: '',
+                                    name: '📅',
                                 },
                             },
                             {
@@ -40,20 +40,23 @@ async function modal(interaction) {
                                 value: 'partnership',
                                 description: 'Select this option to get in touch with our PR team! Alternatively, email partnerships@atlacord.com.',
                                 emoji: {
-                                    name: '',
+                                    name: '👔',
                                 },
                             },
                             {
                                 label: 'Report a staff member',
                                 value: 'staffreport',
-                                description: 'We take staff reports very seriously. If reporting an admin, please DM our owner TwoDog instead.'
+                                description: 'We take staff reports very seriously. If reporting an admin, please DM our owner TwoDog instead.',
+                                emoji: {
+                                    name: '📣'
+                                },
                             },
                             {
                                 label: 'Other',
                                 value: 'other',
                                 description: 'For requests that don\'t fit into any of the other categories.',
                                 emoji: {
-                                    name: ''
+                                    name: '🗂️'
                                 },
                             }
                         ]
