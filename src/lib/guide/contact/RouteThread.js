@@ -1,4 +1,3 @@
-let https = require('https');
 let jwt = require('jsonwebtoken');
 
 function createToken(data, duration) {
@@ -17,40 +16,34 @@ async function route(interaction) {
     let category;
     switch (interaction.components[0].components[0].values[0]) {
         case 'report':
-            category = '';
+            category = '719883529470738523';
             break;
         case 'suggestion':
-            category = '';
+            category = '719883529470738523';
             break;
         case 'eventmaster':
-            category = '';
+            category = '1039274712905298062';
             break;
         case 'partnerships':
-            category = '';
+            category = '1039274712905298062';
             break;
         case 'staffreport':
-            category = '';
+            category = '828540781291241492';
             break;
         case 'other':
-            category = '';
+            category = '719883529470738523';
             break;
     };
 
-    let data = {
+    const data = {
         user: interaction.member.user,
         category: category,
         content: interaction.components[0].components[1].values
     };
-    
+
     const payload = createToken(data);
-    await https.post('https://hawky.atla.sh/threads/create', { method: 'POST' }, (res) => {
-        let d = '';
-        res.on('data', (chunk) => {
-            d += chunk;
-        });
-        req.write(payload);
-        req.end();
-    });
+    const res = await fetch('https://hawky.atla.sh/threads/create', { method: 'POST', body: payload });
+    return res.json();
 };
 
 module.exports = { route };
