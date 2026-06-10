@@ -7,7 +7,7 @@ class CreateGuide extends Command {
       ...options, 
       name: 'createguide',
       aliases: ['guide'],
-      description: 'Recreates the guide component if it is deleted',
+      description: 'Recreates the guide component if it is deleted. Otherwise, this command edits the existing message.',
       detailedDescription: { usage: ['n.createguide'] },
       preconditions: ['Admin']
     });
