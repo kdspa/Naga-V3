@@ -65,9 +65,20 @@ let flags = {
 
 class Utilities {
 
+  cleanRegex = new RegExp('([_\*`])', 'g');
+
   constructor() {
     this.invite = this.invite = /^(discord.gg\/|discordapp.com\/invite\/)([a-z0-9]+)$/gi;
   };
+
+  /**
+   * Removes escapable characters from strings
+   * @param {string} str 
+   * @returns 
+   */
+  clean(str) {
+		return str.replace(this.cleanRegex, '\\$&');
+	};
 
   /**
    * Returns a predefined color
@@ -229,6 +240,28 @@ class Utilities {
     return timestamp;
   }
 
+  /**
+	 * Get the full username and discriminator for a user or member
+	 */
+  fullName(user, escape = true) {
+		user = user.user || user;
+
+		const discrim = user.discriminator || user.discrim;
+		let username = user.username || user.name;
+
+		if (!username) {
+			return user.id;
+		}
+
+		username = this.clean(username);
+
+		if (escape) {
+			username.replace(/\\/g, '\\\\').replace(/`/g, `\`${String.fromCharCode(8203)}`);
+		}
+
+    if (discrim === '0') return username;
+		else return `${username}#${discrim}`;
+	};
 }
 
 module.exports = { Utilities };
