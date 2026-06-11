@@ -1,9 +1,11 @@
-const { SapphireClient, container, LogLevel } = require('@sapphire/framework');
+const { SapphireClient, container, LogLevel, ApplicationCommandRegistries, RegisterBehavior } = require('@sapphire/framework');
 const { GatewayIntentBits } = require('discord.js');
 const mongoose = require('mongoose');
 
 require('@sapphire/plugin-logger/register');
 require('dotenv').config({ path: __dirname + '/.env' });
+
+ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.BulkOverwrite);
 
 mongoose.connect(process.env.DB_CONNECTION_STRING)
   .then(() => container.logger.info(`Successfully connected to database!`))
