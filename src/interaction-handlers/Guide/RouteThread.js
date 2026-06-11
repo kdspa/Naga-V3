@@ -11,20 +11,8 @@ class RouteThread extends InteractionHandler {
     }
 
   parse(interaction) {
-    const [userId, expirationTime, customId] = interaction.customId.split(':');
-
-    if (customId != 'modal_contact') return this.none();
-
-    if (userId != interaction.user.id) {
-        interaction.reply({
-            content: 'You can\'t use this menu',
-            flags: MessageFlags.Ephemeral
-        }).catch(() => {});
-
-        return this.none();
-    }
-    
-    if (Date.now() > expirationTime) {
+    if (interaction.customId !== 'modal_contact') return this.none();
+    if (Date.now() > interaction.expirationTime) {
         interaction.reply({
             content: 'This menu has expired',
             flags: MessageFlags.Ephemeral
@@ -34,7 +22,7 @@ class RouteThread extends InteractionHandler {
     }
 
         return this.some();
-    }
+    };
 
     async run(interaction) {
         route(interaction);

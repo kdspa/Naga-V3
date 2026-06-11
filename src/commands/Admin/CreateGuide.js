@@ -7,7 +7,7 @@ class CreateGuide extends Command {
       ...options, 
       name: 'createguide',
       aliases: ['guide'],
-      description: 'Recreates the guide component if it is deleted. Otherwise, this command edits the existing message.',
+      description: 'Recreates the guide component if it is deleted',
       detailedDescription: { usage: ['n.createguide'] },
       preconditions: ['Admin']
     });
@@ -15,8 +15,8 @@ class CreateGuide extends Command {
 
   async messageRun(message, args) {
     const client = this.container.client;
-    let channel = await client.channels.cache.get('1178846102586404884');
-    let msg = await channel.messages.fetch('1511434943992041632');
+    let channel = await client.channels.cache.get('1053064927935467530');
+    let msg = await channel.messages.fetch('1066847898748338226');
     await msg.edit(home);
   }
 }

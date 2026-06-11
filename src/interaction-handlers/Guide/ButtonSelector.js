@@ -14,11 +14,11 @@ class ButtonSelector extends InteractionHandler {
     };
 
     parse(interaction) {
-        if (!interaction.customId.startsWith('guide_button')) {
+        if ((!interaction.customId.startsWith('guide_button')) || (interaction.customId === 'guide_button_contact')) {
             return this.none();
         }
         return this.some();
-    }
+    };
 
     async run(interaction) {
         try {
