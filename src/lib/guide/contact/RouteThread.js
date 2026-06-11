@@ -9,7 +9,7 @@ function createToken(data, duration) {
       options.expiresIn = duration;
     };
   
-    return jwt.sign(data, process.env.HAWKY_API_SECRET, options);
+    return jwt.sign(data, process.env.MODMAIL_API_SECRET, options);
 };
 
 async function route(interaction) {
@@ -43,7 +43,7 @@ async function route(interaction) {
         };
 
         const payload = createToken(data);
-        const res = await fetch(`http://${process.env.HAWKY_API_HOST}/threads/create?t=${encodeURIComponent(payload)}`);
+        const res = await fetch(`http://${process.env.MODMAIL_API_HOST}/threads/create?t=${encodeURIComponent(payload)}`);
     } catch (err) {
         console.error(err);
     }
