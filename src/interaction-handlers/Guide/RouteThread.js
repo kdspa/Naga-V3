@@ -26,6 +26,7 @@ class RouteThread extends InteractionHandler {
 
     async run(interaction) {
         route(interaction);
+        await interaction.reply({ flags: MessageFlags.Ephemeral, content: 'Your submission was received successfully!'})
     };
 }
 
