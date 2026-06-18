@@ -2,22 +2,22 @@ const util = require('util');
 const { exec } = require('child_process');
 const { Command } = require('@sapphire/framework');
 
-class Restart extends Command {
+class ServerStats extends Command {
     constructor(context, options) {
         super(context, {
             ...options, 
-            name: 'restart',
-            aliases: ['rs'],
-            description: 'Restarts the bot client',
-            preconditions: ['DevOnly']
+            name: 'serverstats',
+            aliases: [],
+            description: 'Displays server stats related to Naga',
+            preconditions: ['DaiLi']
         });
     };
 
     registerApplicationCommands(registry) {
         registry.registerChatInputCommand((builder) =>
             builder
-            .setName('restart')
-            .setDescription('restarts the bot client')
+            .setName('serverstats')
+            .setDescription('Displays server stats related to Naga')
         )
     };
 
@@ -58,4 +58,4 @@ class Restart extends Command {
     };
 };
 
-module.exports = { Restart };
+module.exports = { ServerStats };
