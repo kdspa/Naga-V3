@@ -22,11 +22,11 @@ class Restart extends Command {
     };
 
     /**
-     * Evals JavaScript code
-     * @param {*} env 
+     * Restarts the bot client
+     * @param {Message|Interaction} msg A Message or Interaction object 
      * @returns 
      */
-    async restart(msg, command) {
+    async restart(msg) {
         try {
             this.container.utils.sendSuccess(msg.channel, `Restarting ${this.container.client.user.username}.`);
 

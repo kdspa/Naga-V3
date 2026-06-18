@@ -56,8 +56,9 @@ class Exec extends Command {
     };
 
     /**
-     * Evals JavaScript code
-     * @param {*} env 
+     * Executes shell commands
+     * @param {Message} msg
+     * @param {string} command 
      * @returns 
      */
     async execute(msg, command) {

@@ -52,7 +52,8 @@ class Eval extends Command {
 
     /**
      * Evals JavaScript code
-     * @param {*} env 
+     * @param {Message|Interact} msg Message or Interaction object
+     * @param {string} args JavaScript code to evaluate
      * @returns 
      */
     async evaluate(msg, args) {
