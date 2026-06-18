@@ -1,7 +1,7 @@
 const util = require('util');
 const { Command } = require('@sapphire/framework');
 
-class ShowCommands extends Command {
+class Eval extends Command {
     constructor(context, options) {
         super(context, {
             ...options, 
@@ -96,3 +96,5 @@ class ShowCommands extends Command {
         await this.evaluate(interaction, eval);
     };
 };
+
+module.exports = { Eval };
