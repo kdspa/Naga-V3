@@ -1,0 +1,56 @@
+const util = require('util');
+const { exec } = require('child_process');
+const { Command } = require('@sapphire/framework');
+
+class Restart extends Command {
+    constructor(context, options) {
+        super(context, {
+            ...options, 
+            name: 'restart',
+            aliases: ['rs'],
+            description: 'Restarts the bot client',
+            preconditions: ['DevOnly']
+        });
+    };
+
+    registerApplicationCommands(registry) {
+        registry.registerChatInputCommand((builder) =>
+            builder
+            .setName('restart')
+            .setDescription('restarts the bot client')
+        )
+    };
+
+    /**
+     * Evals JavaScript code
+     * @param {*} env 
+     * @returns 
+     */
+    async restart(msg, command) {
+        try {
+            this.container.utils.sendSuccess(msg.channel, `Restarting ${this.container.client.user.username}.`);
+
+            process.exec(`pm2 restart Naga`, (error, stdout) => {
+                const outputType = error || stdout;
+                let output = outputType;
+                if (typeof outputType === 'object') {
+                    output = inspect(outputType, {
+                        depth: Infinity
+                    });
+                };
+            });
+        } catch (err) {
+            this.container.utils.sendError(msg.channel, err);
+        };
+    };
+
+    messageRun(message) {
+        await this.restart(message);
+    };
+
+    chatInputRun(interaction) {
+        await this.restart(interaction);
+    };
+};
+
+module.exports = { Restart };
