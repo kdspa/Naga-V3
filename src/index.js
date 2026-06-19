@@ -3,6 +3,7 @@ const { GatewayIntentBits } = require('discord.js');
 const mongoose = require('mongoose');
 
 require('@sapphire/plugin-logger/register');
+require('@sapphire/plugin-scheduled-tasks/register');
 require('dotenv').config({ path: __dirname + '/.env' });
 
 ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(RegisterBehavior.BulkOverwrite);
