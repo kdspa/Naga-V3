@@ -1,5 +1,6 @@
 const { ScheduledTask } = require('@sapphire/plugin-scheduled-tasks');
 const axios = require('axios');
+const banners = require('../assets/banners.json');
 
 export class ChangeBanner extends ScheduledTask {
     constructor(context, options) {
@@ -36,9 +37,9 @@ export class ChangeBanner extends ScheduledTask {
 
         doc.save().then(async () => {
             try {
-                await this.container.guilds.cache.get('370708369951948800').edit({ banner: res }, 'Weekly autochange');
+                await this.container.guilds.cache.get('370708369951948800').edit({ banner: res, discoverySplash: res }, 'Weekly autochange');
             } catch (err) {
-                return console.error(`Failed to change the banner: ${err}`)
+                return console.error(`Failed to change the banner: ${err}`);
             };
         });
     };
