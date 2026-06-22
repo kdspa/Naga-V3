@@ -6,7 +6,7 @@ export class ChangeBanner extends ScheduledTask {
     constructor(context, options) {
         super(context, {
             ...options,
-            pattern: '0 0 * * 0'
+            pattern: '0 0 * * 0' // Every Monday at midnight UTC
         });
     };
 

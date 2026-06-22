@@ -1,6 +1,7 @@
 const { ScheduledTask } = require('@sapphire/plugin-scheduled-tasks');
 
 const GUILD_ID = '370708369951948800';
+const BIRTHDAY_CHANNEL = '1007044599287656559';
 const BIRTHDAY_ROLE = '787644908705153024'
 
 const IGNORED_MEMBERS = [
@@ -11,7 +12,7 @@ export class ClearBirthdays extends ScheduledTask {
     constructor(context, options) {
         super(context, {
             ...options,
-            pattern: '0 0 * * 0'
+            pattern: '0 0 * * *' // Every day at midnight UTC
         });
     };
 
@@ -47,7 +48,7 @@ export class ClearBirthdays extends ScheduledTask {
                 };
 
                 if (birthdayMentions.length >= 1) {
-                    const birthdayChannel = guild.channels.cache.get('1007044599287656559');
+                    const birthdayChannel = guild.channels.cache.get(BIRTHDAY_CHANNEL);
 
                     let birthdayChannelMessages = await birthdayChannel.message.fetch();
                     birthdayChannelMessages.pop(); // First message in birthday channel won't be deleted
