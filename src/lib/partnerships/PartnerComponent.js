@@ -45,6 +45,14 @@ function generateComponent(partner) {
         ]
     };
 
+    if (partner.links.reddit !== null ) {
+        component.components[2].components.push({ type: 2, style: 5, label: 'Subreddit', url: partner.links.reddit});
+    };
+
+    if (partner.links.wiki !== null ) {
+        component.components[2].components.push({ type: 2, style: 5, label: 'Wiki', url: partner.links.wiki});
+    };
+
     return {
         flags: MessageFlags.IsComponentsV2,
         allowed_mentions: { parse: [] },
@@ -58,4 +66,4 @@ function partners() {
         components.push(generateComponent(partner));
     };
     return components;
-}
+};
