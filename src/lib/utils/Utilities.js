@@ -222,6 +222,15 @@ class Utilities {
     return new Date(Number(milliseconds) + DISCORD_EPOCH)
   }
 
+  /**
+   * Converts a non-UNIX timestamp to UNIX
+   * @param {Number} timestamp A non-UNIX date
+   * @returns 
+   */
+  convertTimestampToUnix(timestamp) {
+    return timestamp;
+  }
+
   validateSnowflake(snowflake) {
     if (!Number.isInteger(+snowflake)) {
         throw new Error('That doesn\'t look like a snowflake. Snowflakes contain only numbers.');
