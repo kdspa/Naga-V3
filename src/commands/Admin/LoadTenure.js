@@ -1,6 +1,6 @@
 const { Command } = require('@sapphire/framework');
 
-class Eval extends Command {
+class LoadTenure extends Command {
     constructor(context, options) {
         super(context, {
             ...options, 
